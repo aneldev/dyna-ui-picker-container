@@ -36,9 +36,9 @@ export class DynaPickerContainer extends React.Component<IDynaPickerContainerPro
     } = this.props;
 
     const className: string = [
-      'dyna-ui-pricker-container',
-      `dyna-ui-pricker-container-style-${style}`,
-      `dyna-ui-pricker-container-color-${color}`,
+      'dyna-ui-picker-container',
+      `dyna-ui-picker-container-style-${style}`,
+      `dyna-ui-picker-container-color-${color}`,
       show ? '--show' : '--hide',
     ].join(' ').trim();
 
