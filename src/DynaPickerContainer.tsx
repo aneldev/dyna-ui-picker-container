@@ -16,7 +16,7 @@ export enum EColor {
 }
 
 export interface IDynaPickerContainerProps {
-  show: boolean;
+  show?: boolean;
   children: any;
   style?: EStyle;
   color?: EColor;
