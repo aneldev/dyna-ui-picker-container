@@ -12,7 +12,7 @@ export declare enum EColor {
     ORANGE_WHITE = "ORANGE_WHITE",
 }
 export interface IDynaPickerContainerProps {
-    show: boolean;
+    show?: boolean;
     children: any;
     style?: EStyle;
     color?: EColor;
