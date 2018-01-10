@@ -1063,9 +1063,7 @@ var DynaPickerContainer = /** @class */ (function (_super) {
             "dyna-ui-pricker-container-color-" + color,
             show ? '--show' : '--hide',
         ].join(' ').trim();
-        return (React.createElement("div", { className: className },
-            React.createElement("div", { className: "dyna-ui-pricker-container-arrow-helper" }),
-            React.createElement("div", { className: "dyna-ui-pricker-container-content" }, children)));
+        return (React.createElement("div", { className: className }, children));
     };
     DynaPickerContainer.defaultProps = {
         show: true,
@@ -2707,7 +2705,7 @@ exports = module.exports = __webpack_require__(6)(false);
 
 
 // module
-exports.push([module.i, ".dyna-ui-pricker-container-style-INLINE_ROUNDED {\n  position: absolute;\n  border-style: solid;\n  border-width: 1px;\n  border-radius: 10px;\n  margin-top: 12px;\n}\n.dyna-ui-pricker-container-style-INLINE_ROUNDED .dyna-ui-pricker-container-arrow-helper {\n  display: block;\n  position: absolute;\n  border-style: solid;\n  width: 14px;\n  height: 14px;\n  -webkit-transform: rotate(45deg);\n          transform: rotate(45deg);\n  top: -8px;\n  left: 23px;\n  border-width: 1px 0 0 1px;\n}\n.dyna-ui-pricker-container .\\--show {\n  display: block;\n}\n.dyna-ui-pricker-container .\\--hide {\n  display: none;\n}\n", ""]);
+exports.push([module.i, ".dyna-ui-pricker-container-style-INLINE_ROUNDED {\n  position: absolute;\n  border-style: solid;\n  border-width: 1px;\n  border-radius: 10px;\n  margin-top: 12px;\n}\n.dyna-ui-pricker-container-style-INLINE_ROUNDED:after {\n  content: '';\n  display: block;\n  position: absolute;\n  left: 15px;\n  width: 0;\n  height: 0;\n  border-style: solid;\n  top: -30px;\n  border-color: transparent transparent deeppink transparent;\n  border-width: 15px;\n}\n.dyna-ui-pricker-container .\\--show {\n  display: block;\n}\n.dyna-ui-pricker-container .\\--hide {\n  display: none;\n}\n", ""]);
 
 // exports
 
@@ -2847,7 +2845,7 @@ exports = module.exports = __webpack_require__(6)(false);
 
 
 // module
-exports.push([module.i, ".dyna-ui-pricker-container-color-WHITE_BLACK {\n  color: black;\n  border-color: black;\n  background-color: white;\n}\n.dyna-ui-pricker-container-color-WHITE_BLACK .dyna-ui-pricker-container-arrow-helper {\n  background-color: white;\n}\n.dyna-ui-pricker-container-color-WHITE_RED {\n  color: red;\n  border-color: red;\n  background-color: white;\n}\n.dyna-ui-pricker-container-color-WHITE_RED .dyna-ui-pricker-container-arrow-helper {\n  background-color: white;\n}\n.dyna-ui-pricker-container-color-BLACK_WHITE {\n  color: white;\n  border-color: white;\n  background-color: black;\n}\n.dyna-ui-pricker-container-color-BLACK_WHITE .dyna-ui-pricker-container-arrow-helper {\n  background-color: black;\n}\n.dyna-ui-pricker-container-color-ORANGE_WHITE {\n  color: #eb8a0f;\n  border-color: #eb8a0f;\n  background-color: white;\n}\n.dyna-ui-pricker-container-color-ORANGE_WHITE .dyna-ui-pricker-container-arrow-helper {\n  background-color: white;\n}\n", ""]);
+exports.push([module.i, ".dyna-ui-pricker-container-color-WHITE_BLACK {\n  color: black;\n  border-color: black;\n  background-color: white;\n}\n.dyna-ui-pricker-container-color-WHITE_BLACK:after {\n  border-bottom-color: black;\n}\n.dyna-ui-pricker-container-color-WHITE_RED {\n  color: red;\n  border-color: red;\n  background-color: white;\n}\n.dyna-ui-pricker-container-color-WHITE_RED:after {\n  border-bottom-color: red;\n}\n.dyna-ui-pricker-container-color-BLACK_WHITE {\n  color: white;\n  border-color: black;\n  background-color: black;\n}\n.dyna-ui-pricker-container-color-BLACK_WHITE:after {\n  border-bottom-color: black;\n}\n.dyna-ui-pricker-container-color-TRANSPARENT_WHITE {\n  color: white;\n  border-color: white;\n  background-color: transparent;\n}\n.dyna-ui-pricker-container-color-TRANSPARENT_WHITE:after {\n  border-bottom-color: white;\n}\n.dyna-ui-pricker-container-color-ORANGE_WHITE {\n  color: #eb8a0f;\n  border-color: #eb8a0f;\n  background-color: white;\n}\n.dyna-ui-pricker-container-color-ORANGE_WHITE:after {\n  border-bottom-color: #eb8a0f;\n}\n", ""]);
 
 // exports
 
