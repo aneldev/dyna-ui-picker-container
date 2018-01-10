@@ -43,9 +43,7 @@ export class DynaPickerContainer extends React.Component<IDynaPickerContainerPro
     ].join(' ').trim();
 
     return (
-      <div className={className}>
-        <div className="dyna-ui-pricker-container-content">{children}</div>
-      </div>
+      <div className={className}>{children}</div>
     );
   }
 }
