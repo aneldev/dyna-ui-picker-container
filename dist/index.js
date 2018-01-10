@@ -1058,9 +1058,9 @@ var DynaPickerContainer = /** @class */ (function (_super) {
     DynaPickerContainer.prototype.render = function () {
         var _a = this.props, show = _a.show, children = _a.children, style = _a.style, color = _a.color;
         var className = [
-            'dyna-ui-pricker-container',
-            "dyna-ui-pricker-container-style-" + style,
-            "dyna-ui-pricker-container-color-" + color,
+            'dyna-ui-picker-container',
+            "dyna-ui-picker-container-style-" + style,
+            "dyna-ui-picker-container-color-" + color,
             show ? '--show' : '--hide',
         ].join(' ').trim();
         return (React.createElement("div", { className: className }, children));
@@ -2705,7 +2705,7 @@ exports = module.exports = __webpack_require__(6)(false);
 
 
 // module
-exports.push([module.i, ".dyna-ui-pricker-container-style-INLINE_ROUNDED {\n  position: absolute;\n  border-style: solid;\n  border-width: 1px;\n  border-radius: 10px;\n  margin-top: 12px;\n}\n.dyna-ui-pricker-container-style-INLINE_ROUNDED:after {\n  content: '';\n  display: block;\n  position: absolute;\n  left: 15px;\n  width: 0;\n  height: 0;\n  border-style: solid;\n  top: -30px;\n  border-color: transparent transparent deeppink transparent;\n  border-width: 15px;\n}\n.dyna-ui-pricker-container .\\--show {\n  display: block;\n}\n.dyna-ui-pricker-container .\\--hide {\n  display: none;\n}\n", ""]);
+exports.push([module.i, ".dyna-ui-picker-container-style-INLINE_ROUNDED {\n  position: absolute;\n  border-style: solid;\n  border-width: 1px;\n  border-radius: 10px;\n  margin-top: 12px;\n}\n.dyna-ui-picker-container-style-INLINE_ROUNDED:after {\n  content: '';\n  display: block;\n  position: absolute;\n  left: 15px;\n  width: 0;\n  height: 0;\n  border-style: solid;\n  top: -30px;\n  border-color: transparent transparent deeppink transparent;\n  border-width: 15px;\n}\n.dyna-ui-picker-container .\\--show {\n  display: block;\n}\n.dyna-ui-picker-container .\\--hide {\n  display: none;\n}\n", ""]);
 
 // exports
 
@@ -2845,7 +2845,7 @@ exports = module.exports = __webpack_require__(6)(false);
 
 
 // module
-exports.push([module.i, ".dyna-ui-pricker-container-color-WHITE_BLACK {\n  color: black;\n  border-color: black;\n  background-color: white;\n}\n.dyna-ui-pricker-container-color-WHITE_BLACK:after {\n  border-bottom-color: black;\n}\n.dyna-ui-pricker-container-color-WHITE_RED {\n  color: red;\n  border-color: red;\n  background-color: white;\n}\n.dyna-ui-pricker-container-color-WHITE_RED:after {\n  border-bottom-color: red;\n}\n.dyna-ui-pricker-container-color-BLACK_WHITE {\n  color: white;\n  border-color: black;\n  background-color: black;\n}\n.dyna-ui-pricker-container-color-BLACK_WHITE:after {\n  border-bottom-color: black;\n}\n.dyna-ui-pricker-container-color-TRANSPARENT_WHITE {\n  color: white;\n  border-color: white;\n  background-color: transparent;\n}\n.dyna-ui-pricker-container-color-TRANSPARENT_WHITE:after {\n  border-bottom-color: white;\n}\n.dyna-ui-pricker-container-color-ORANGE_WHITE {\n  color: #eb8a0f;\n  border-color: #eb8a0f;\n  background-color: white;\n}\n.dyna-ui-pricker-container-color-ORANGE_WHITE:after {\n  border-bottom-color: #eb8a0f;\n}\n", ""]);
+exports.push([module.i, ".dyna-ui-picker-container-color-WHITE_BLACK {\n  color: black;\n  border-color: black;\n  background-color: white;\n}\n.dyna-ui-picker-container-color-WHITE_BLACK:after {\n  border-bottom-color: black;\n}\n.dyna-ui-picker-container-color-WHITE_RED {\n  color: red;\n  border-color: red;\n  background-color: white;\n}\n.dyna-ui-picker-container-color-WHITE_RED:after {\n  border-bottom-color: red;\n}\n.dyna-ui-picker-container-color-BLACK_WHITE {\n  color: white;\n  border-color: black;\n  background-color: black;\n}\n.dyna-ui-picker-container-color-BLACK_WHITE:after {\n  border-bottom-color: black;\n}\n.dyna-ui-picker-container-color-TRANSPARENT_WHITE {\n  color: white;\n  border-color: white;\n  background-color: transparent;\n}\n.dyna-ui-picker-container-color-TRANSPARENT_WHITE:after {\n  border-bottom-color: white;\n}\n.dyna-ui-picker-container-color-ORANGE_WHITE {\n  color: #eb8a0f;\n  border-color: #eb8a0f;\n  background-color: white;\n}\n.dyna-ui-picker-container-color-ORANGE_WHITE:after {\n  border-bottom-color: #eb8a0f;\n}\n", ""]);
 
 // exports
 
