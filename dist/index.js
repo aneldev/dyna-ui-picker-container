@@ -1045,6 +1045,7 @@ var EStyle;
 var EColor;
 (function (EColor) {
     EColor["WHITE_BLACK"] = "WHITE_BLACK";
+    EColor["GRAY_WHITE_BLACK"] = "GRAY_WHITE_BLACK";
     EColor["WHITE_RED"] = "WHITE_RED";
     EColor["BLACK_WHITE"] = "BLACK_WHITE";
     EColor["TRANSPARENT_WHITE"] = "TRANSPARENT_WHITE";
@@ -2845,7 +2846,7 @@ exports = module.exports = __webpack_require__(6)(false);
 
 
 // module
-exports.push([module.i, ".dyna-ui-picker-container-color-WHITE_BLACK {\n  color: black;\n  border-color: black;\n  background-color: white;\n}\n.dyna-ui-picker-container-color-WHITE_BLACK:after {\n  border-bottom-color: black;\n}\n.dyna-ui-picker-container-color-WHITE_RED {\n  color: red;\n  border-color: red;\n  background-color: white;\n}\n.dyna-ui-picker-container-color-WHITE_RED:after {\n  border-bottom-color: red;\n}\n.dyna-ui-picker-container-color-BLACK_WHITE {\n  color: white;\n  border-color: black;\n  background-color: black;\n}\n.dyna-ui-picker-container-color-BLACK_WHITE:after {\n  border-bottom-color: black;\n}\n.dyna-ui-picker-container-color-TRANSPARENT_WHITE {\n  color: white;\n  border-color: white;\n  background-color: transparent;\n}\n.dyna-ui-picker-container-color-TRANSPARENT_WHITE:after {\n  border-bottom-color: white;\n}\n.dyna-ui-picker-container-color-ORANGE_WHITE {\n  color: #eb8a0f;\n  border-color: #eb8a0f;\n  background-color: white;\n}\n.dyna-ui-picker-container-color-ORANGE_WHITE:after {\n  border-bottom-color: #eb8a0f;\n}\n", ""]);
+exports.push([module.i, ".dyna-ui-picker-container-color-WHITE_BLACK {\n  color: black;\n  border-color: black;\n  background-color: white;\n}\n.dyna-ui-picker-container-color-WHITE_BLACK:after {\n  border-bottom-color: black;\n}\n.dyna-ui-picker-container-color-GRAY_WHITE_BLACK {\n  color: #434343;\n  border-color: #434343;\n  background-color: white;\n}\n.dyna-ui-picker-container-color-GRAY_WHITE_BLACK:after {\n  border-bottom-color: #434343;\n}\n.dyna-ui-picker-container-color-WHITE_RED {\n  color: red;\n  border-color: red;\n  background-color: white;\n}\n.dyna-ui-picker-container-color-WHITE_RED:after {\n  border-bottom-color: red;\n}\n.dyna-ui-picker-container-color-BLACK_WHITE {\n  color: white;\n  border-color: black;\n  background-color: black;\n}\n.dyna-ui-picker-container-color-BLACK_WHITE:after {\n  border-bottom-color: black;\n}\n.dyna-ui-picker-container-color-TRANSPARENT_WHITE {\n  color: white;\n  border-color: white;\n  background-color: transparent;\n}\n.dyna-ui-picker-container-color-TRANSPARENT_WHITE:after {\n  border-bottom-color: white;\n}\n.dyna-ui-picker-container-color-ORANGE_WHITE {\n  color: #eb8a0f;\n  border-color: #eb8a0f;\n  background-color: white;\n}\n.dyna-ui-picker-container-color-ORANGE_WHITE:after {\n  border-bottom-color: #eb8a0f;\n}\n", ""]);
 
 // exports
 
