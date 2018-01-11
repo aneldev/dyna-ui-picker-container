@@ -1,5 +1,4 @@
 .dyna-ui-picker-container {
-
 	&-color- {
 		&WHITE_BLACK {
 			color: black;
@@ -7,6 +6,15 @@
 			background-color: white;
 			&:after {
 				border-bottom-color: black;
+			}
+		}
+		&GRAY_WHITE_BLACK {
+			@gray: #434343;
+			color: @gray;
+			border-color: @gray;
+			background-color: white;
+			&:after {
+				border-bottom-color: @gray;
 			}
 		}
 		&WHITE_RED {

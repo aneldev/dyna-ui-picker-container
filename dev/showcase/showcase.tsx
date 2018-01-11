@@ -57,6 +57,14 @@ export default {
           } as IDynaPickerContainerProps
         },
         {
+          slug: 'gray-white-black',
+          title: 'gray-white-black',
+          props: {
+            style: EStyle.ROUNDED,
+            color: EColor.GRAY_WHITE_BLACK,
+          } as IDynaPickerContainerProps
+        },
+        {
           slug: 'transparent-white',
           title: 'transparent-white',
           props: {
