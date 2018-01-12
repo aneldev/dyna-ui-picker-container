@@ -4,8 +4,11 @@
 			color: black;
 			border-color: black;
 			background-color: white;
-			&:after {
+			&:before {
 				border-bottom-color: black;
+			}
+			&:after {
+				border-bottom-color: white;
 			}
 		}
 		&GRAY_WHITE_BLACK {
@@ -13,22 +16,31 @@
 			color: @gray;
 			border-color: @gray;
 			background-color: white;
-			&:after {
+			&:before {
 				border-bottom-color: @gray;
+			}
+			&:after {
+				border-bottom-color: white;
 			}
 		}
 		&WHITE_RED {
 			color: red;
 			border-color: red;
 			background-color: white;
-			&:after {
+			&:before {
 				border-bottom-color: red;
+			}
+			&:after {
+				border-bottom-color: white;
 			}
 		}
 		&BLACK_WHITE {
 			color: white;
 			border-color: black;
 			background-color: black;
+			&:before {
+				border-bottom-color: black;
+			}
 			&:after {
 				border-bottom-color: black;
 			}
@@ -37,16 +49,22 @@
 			color: white;
 			border-color: white;
 			background-color: transparent;
-			&:after {
+			&:before {
 				border-bottom-color: white;
+			}
+			&:after {
+				border-bottom-color: white; // !! transparent returns the white of the :before
 			}
 		}
 		&ORANGE_WHITE {
 			color: #eb8a0f;
 			border-color: #eb8a0f;
 			background-color: white;
-			&:after {
+			&:before {
 				border-bottom-color: #eb8a0f;
+			}
+			&:after {
+				border-bottom-color: white;
 			}
 		}
 	}
