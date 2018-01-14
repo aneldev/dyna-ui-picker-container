@@ -40,7 +40,8 @@ export class DynaPickerContainer extends React.Component<IDynaPickerContainerPro
       'dyna-ui-picker-container',
       `dyna-ui-picker-container-style-${style}`,
       `dyna-ui-picker-container-color-${color}`,
-      show ? '--show' : '--hide',
+      `dyna-ui-picker-container--${show ? 'show' : 'hide'}`,
+      ,
     ].join(' ').trim();
 
     return (
