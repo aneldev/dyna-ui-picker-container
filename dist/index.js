@@ -1062,7 +1062,8 @@ var DynaPickerContainer = /** @class */ (function (_super) {
             'dyna-ui-picker-container',
             "dyna-ui-picker-container-style-" + style,
             "dyna-ui-picker-container-color-" + color,
-            show ? '--show' : '--hide',
+            "dyna-ui-picker-container--" + (show ? 'show' : 'hide'),
+            ,
         ].join(' ').trim();
         return (React.createElement("div", { className: className }, children));
     };
@@ -2706,7 +2707,7 @@ exports = module.exports = __webpack_require__(6)(false);
 
 
 // module
-exports.push([module.i, ".dyna-ui-picker-container-style-INLINE_ROUNDED {\n  position: absolute;\n  border-style: solid;\n  border-width: 1px;\n  border-radius: 10px;\n  margin-top: 12px;\n}\n.dyna-ui-picker-container-style-INLINE_ROUNDED:before,\n.dyna-ui-picker-container-style-INLINE_ROUNDED:after {\n  content: '';\n  display: block;\n  position: absolute;\n  left: 15px;\n  width: 0;\n  height: 0;\n  border-style: solid;\n  top: -30px;\n  border-color: transparent transparent deeppink transparent;\n  border-width: 15px;\n}\n.dyna-ui-picker-container-style-INLINE_ROUNDED:after {\n  top: -28px;\n  left: 16px;\n  border-width: 14px;\n}\n.dyna-ui-picker-container .\\--show {\n  display: block;\n}\n.dyna-ui-picker-container .\\--hide {\n  display: none;\n}\n", ""]);
+exports.push([module.i, ".dyna-ui-picker-container-style-INLINE_ROUNDED {\n  position: absolute;\n  border-style: solid;\n  border-width: 1px;\n  border-radius: 10px;\n  margin-top: 12px;\n}\n.dyna-ui-picker-container-style-INLINE_ROUNDED:before,\n.dyna-ui-picker-container-style-INLINE_ROUNDED:after {\n  content: '';\n  display: block;\n  position: absolute;\n  left: 15px;\n  width: 0;\n  height: 0;\n  border-style: solid;\n  top: -30px;\n  border-color: transparent transparent deeppink transparent;\n  border-width: 15px;\n}\n.dyna-ui-picker-container-style-INLINE_ROUNDED:after {\n  top: -28px;\n  left: 16px;\n  border-width: 14px;\n}\n.dyna-ui-picker-container--show {\n  display: block;\n}\n.dyna-ui-picker-container--hide {\n  display: none;\n}\n", ""]);
 
 // exports
 
