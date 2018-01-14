@@ -54,7 +54,7 @@ This boilerplate uses the [dyna-showcase](https://github.com/aneldev/dyna-showca
 - Implement your component(s) under `src/`
 - Implement the usage of your components(s) in `dev/showcase/showcase.tsx`
 - Call `npm start`
-- Open in any browser [http://localhost:3205](http://localhost:3205) to **develop**, **debug** or **preview**.
+- Open in any browser [http://localhost:3200](http://localhost:3200) to **develop**, **debug** or **preview**.
 
 # Test
 
