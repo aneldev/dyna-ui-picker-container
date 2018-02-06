@@ -1,38 +1,53 @@
+@import (reference) "~dyna-ui-styles/media-queries/basic.less";
+
 .dyna-ui-picker-container {
 
-		&-style- {
-			&INLINE_ROUNDED {
-				position: absolute;
-				border-style: solid;
-				border-width: 1px;
-				border-radius: 10px;
-				margin-top: 12px;
+	&-style- {
+		&INLINE_ROUNDED {
 
-				&:before,
-				&:after {
-					content: '';
-					display: block;
-					position: absolute;
-					left: 15px;
-					width: 0;
-					height: 0;
-					border-style: solid;
-					top: -30px;
-					border-color: transparent transparent deeppink transparent;
-					border-width: 15px;
-				}
-				&:after {
-					top: -28px;
-					left: 16px;
-					border-width: 14px;
-				}
+			position: absolute;
+			border-style: solid;
+			border-width: 1px;
+			border-radius: 10px;
+			margin-top: 12px;
+
+			&:before,
+			&:after {
+				content: '';
+				display: block;
+				position: absolute;
+				left: 15px;
+				width: 0;
+				height: 0;
+				border-style: solid;
+				top: -30px;
+				border-color: transparent transparent deeppink transparent;
+				border-width: 15px;
+			}
+
+			&:after {
+				top: -28px;
+				left: 16px;
+				border-width: 14px;
+			}
+
+			@media (max-width: @media-tablet) {
+				position: fixed;
+				top: 0;
+				bottom: 0;
+				left: 0;
+				right: 0;
+				border: none;
+				margin: 0;
+				border-radius: 0;
 			}
 		}
+	}
 
-		&--show {
-			display: block;
-		}
-		&--hide {
-			display: none;
-		}
+	&--show {
+		display: block;
+	}
+	&--hide {
+		display: none;
+	}
 }
