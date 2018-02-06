@@ -70,7 +70,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ 	__webpack_require__.p = "/dist/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 7);
+/******/ 	return __webpack_require__(__webpack_require__.s = 8);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -561,6 +561,88 @@ module.exports = warning;
 /* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
+"use strict";
+
+
+/*
+	MIT License http://www.opensource.org/licenses/mit-license.php
+	Author Tobias Koppers @sokra
+*/
+// css base code, injected by the css-loader
+module.exports = function (useSourceMap) {
+	var list = [];
+
+	// return the list of modules as css string
+	list.toString = function toString() {
+		return this.map(function (item) {
+			var content = cssWithMappingToString(item, useSourceMap);
+			if (item[2]) {
+				return "@media " + item[2] + "{" + content + "}";
+			} else {
+				return content;
+			}
+		}).join("");
+	};
+
+	// import a list of modules into the list
+	list.i = function (modules, mediaQuery) {
+		if (typeof modules === "string") modules = [[null, modules, ""]];
+		var alreadyImportedModules = {};
+		for (var i = 0; i < this.length; i++) {
+			var id = this[i][0];
+			if (typeof id === "number") alreadyImportedModules[id] = true;
+		}
+		for (i = 0; i < modules.length; i++) {
+			var item = modules[i];
+			// skip already imported module
+			// this implementation is not 100% perfect for weird media query combinations
+			//  when a module is imported multiple times with different media queries.
+			//  I hope this will never occur (Hey this way we have smaller bundles)
+			if (typeof item[0] !== "number" || !alreadyImportedModules[item[0]]) {
+				if (mediaQuery && !item[2]) {
+					item[2] = mediaQuery;
+				} else if (mediaQuery) {
+					item[2] = "(" + item[2] + ") and (" + mediaQuery + ")";
+				}
+				list.push(item);
+			}
+		}
+	};
+	return list;
+};
+
+function cssWithMappingToString(item, useSourceMap) {
+	var content = item[1] || '';
+	var cssMapping = item[3];
+	if (!cssMapping) {
+		return content;
+	}
+
+	if (useSourceMap && typeof btoa === 'function') {
+		var sourceMapping = toComment(cssMapping);
+		var sourceURLs = cssMapping.sources.map(function (source) {
+			return '/*# sourceURL=' + cssMapping.sourceRoot + source + ' */';
+		});
+
+		return [content].concat(sourceURLs).concat([sourceMapping]).join('\n');
+	}
+
+	return [content].join('\n');
+}
+
+// Adapted from convert-source-map (MIT)
+function toComment(sourceMap) {
+	// eslint-disable-next-line no-undef
+	var base64 = btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap))));
+	var data = 'sourceMappingURL=data:application/json;charset=utf-8;base64,' + base64;
+
+	return '/*# ' + data + ' */';
+}
+
+/***/ }),
+/* 7 */
+/***/ (function(module, exports, __webpack_require__) {
+
 /*
 	MIT License http://www.opensource.org/licenses/mit-license.php
 	Author Tobias Koppers @sokra
@@ -917,27 +999,27 @@ function updateLink (link, options, obj) {
 
 
 /***/ }),
-/* 7 */
+/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(8);
+module.exports = __webpack_require__(9);
 
 
 /***/ }),
-/* 8 */
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var DynaPickerContainer_1 = __webpack_require__(9);
+var DynaPickerContainer_1 = __webpack_require__(10);
 exports.DynaPickerContainer = DynaPickerContainer_1.DynaPickerContainer;
 exports.EStyle = DynaPickerContainer_1.EStyle;
 exports.EColor = DynaPickerContainer_1.EColor;
 
 
 /***/ }),
-/* 9 */
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -953,8 +1035,8 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-var React = __webpack_require__(10);
-__webpack_require__(15);
+var React = __webpack_require__(11);
+__webpack_require__(16);
 __webpack_require__(19);
 var EStyle;
 (function (EStyle) {
@@ -998,21 +1080,21 @@ exports.DynaPickerContainer = DynaPickerContainer;
 
 
 /***/ }),
-/* 10 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(process) {
 
 if (process.env.NODE_ENV === 'production') {
-  module.exports = __webpack_require__(11);
-} else {
   module.exports = __webpack_require__(12);
+} else {
+  module.exports = __webpack_require__(13);
 }
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 11 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1141,7 +1223,7 @@ var U = { Children: { map: function map(a, b, e) {
     W = V && U || V;module.exports = W["default"] ? W["default"] : W;
 
 /***/ }),
-/* 12 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1167,7 +1249,7 @@ if (process.env.NODE_ENV !== "production") {
     var invariant = __webpack_require__(4);
     var warning = __webpack_require__(5);
     var emptyFunction = __webpack_require__(1);
-    var checkPropTypes = __webpack_require__(13);
+    var checkPropTypes = __webpack_require__(14);
 
     // TODO: this is special because it gets imported during build.
 
@@ -2501,7 +2583,7 @@ if (process.env.NODE_ENV !== "production") {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 13 */
+/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2519,7 +2601,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 if (process.env.NODE_ENV !== 'production') {
   var invariant = __webpack_require__(4);
   var warning = __webpack_require__(5);
-  var ReactPropTypesSecret = __webpack_require__(14);
+  var ReactPropTypesSecret = __webpack_require__(15);
   var loggedTypeFailures = {};
 }
 
@@ -2569,7 +2651,7 @@ module.exports = checkPropTypes;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 14 */
+/* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2587,13 +2669,13 @@ var ReactPropTypesSecret = 'SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED';
 module.exports = ReactPropTypesSecret;
 
 /***/ }),
-/* 15 */
+/* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(16);
+var content = __webpack_require__(17);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // Prepare cssTransformation
 var transform;
@@ -2601,7 +2683,7 @@ var transform;
 var options = {}
 options.transform = transform
 // add the styles to the DOM
-var update = __webpack_require__(6)(content, options);
+var update = __webpack_require__(7)(content, options);
 if(content.locals) module.exports = content.locals;
 // Hot Module Replacement
 if(false) {
@@ -2618,10 +2700,10 @@ if(false) {
 }
 
 /***/ }),
-/* 16 */
+/* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(17)(false);
+exports = module.exports = __webpack_require__(6)(false);
 // imports
 
 
@@ -2630,88 +2712,6 @@ exports.push([module.i, ".dyna-ui-picker-container--style-INLINE_ROUNDED {\n  po
 
 // exports
 
-
-/***/ }),
-/* 17 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-/*
-	MIT License http://www.opensource.org/licenses/mit-license.php
-	Author Tobias Koppers @sokra
-*/
-// css base code, injected by the css-loader
-module.exports = function (useSourceMap) {
-	var list = [];
-
-	// return the list of modules as css string
-	list.toString = function toString() {
-		return this.map(function (item) {
-			var content = cssWithMappingToString(item, useSourceMap);
-			if (item[2]) {
-				return "@media " + item[2] + "{" + content + "}";
-			} else {
-				return content;
-			}
-		}).join("");
-	};
-
-	// import a list of modules into the list
-	list.i = function (modules, mediaQuery) {
-		if (typeof modules === "string") modules = [[null, modules, ""]];
-		var alreadyImportedModules = {};
-		for (var i = 0; i < this.length; i++) {
-			var id = this[i][0];
-			if (typeof id === "number") alreadyImportedModules[id] = true;
-		}
-		for (i = 0; i < modules.length; i++) {
-			var item = modules[i];
-			// skip already imported module
-			// this implementation is not 100% perfect for weird media query combinations
-			//  when a module is imported multiple times with different media queries.
-			//  I hope this will never occur (Hey this way we have smaller bundles)
-			if (typeof item[0] !== "number" || !alreadyImportedModules[item[0]]) {
-				if (mediaQuery && !item[2]) {
-					item[2] = mediaQuery;
-				} else if (mediaQuery) {
-					item[2] = "(" + item[2] + ") and (" + mediaQuery + ")";
-				}
-				list.push(item);
-			}
-		}
-	};
-	return list;
-};
-
-function cssWithMappingToString(item, useSourceMap) {
-	var content = item[1] || '';
-	var cssMapping = item[3];
-	if (!cssMapping) {
-		return content;
-	}
-
-	if (useSourceMap && typeof btoa === 'function') {
-		var sourceMapping = toComment(cssMapping);
-		var sourceURLs = cssMapping.sources.map(function (source) {
-			return '/*# sourceURL=' + cssMapping.sourceRoot + source + ' */';
-		});
-
-		return [content].concat(sourceURLs).concat([sourceMapping]).join('\n');
-	}
-
-	return [content].join('\n');
-}
-
-// Adapted from convert-source-map (MIT)
-function toComment(sourceMap) {
-	// eslint-disable-next-line no-undef
-	var base64 = btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap))));
-	var data = 'sourceMappingURL=data:application/json;charset=utf-8;base64,' + base64;
-
-	return '/*# ' + data + ' */';
-}
 
 /***/ }),
 /* 18 */
@@ -2823,7 +2823,7 @@ var transform;
 var options = {}
 options.transform = transform
 // add the styles to the DOM
-var update = __webpack_require__(6)(content, options);
+var update = __webpack_require__(7)(content, options);
 if(content.locals) module.exports = content.locals;
 // Hot Module Replacement
 if(false) {
@@ -2841,9 +2841,17 @@ if(false) {
 
 /***/ }),
 /* 20 */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
-throw new Error("Module build failed: \n\n@import (reference) \"~dyna-ui-styles/styles/\";\n^\nCan't resolve 'dyna-ui-styles/styles/.less' in '/mnt/c/dev/Dyna-repos/dyna-ui-picker-container/src'\n      in /mnt/c/dev/Dyna-repos/dyna-ui-picker-container/src/color.less (line 1, column 0)");
+exports = module.exports = __webpack_require__(6)(false);
+// imports
+
+
+// module
+exports.push([module.i, ".dyna-ui-picker-container--color-WHITE_BLACK {\n  color: black;\n  border-color: black;\n  background-color: white;\n}\n.dyna-ui-picker-container--color-WHITE_BLACK:before {\n  border-bottom-color: black;\n}\n.dyna-ui-picker-container--color-WHITE_BLACK:after {\n  border-bottom-color: white;\n}\n.dyna-ui-picker-container--color-GRAY_WHITE_BLACK {\n  color: #434343;\n  border-color: #434343;\n  background-color: white;\n}\n.dyna-ui-picker-container--color-GRAY_WHITE_BLACK:before {\n  border-bottom-color: #434343;\n}\n.dyna-ui-picker-container--color-GRAY_WHITE_BLACK:after {\n  border-bottom-color: white;\n}\n.dyna-ui-picker-container--color-WHITE_RED {\n  color: red;\n  border-color: red;\n  background-color: white;\n}\n.dyna-ui-picker-container--color-WHITE_RED:before {\n  border-bottom-color: red;\n}\n.dyna-ui-picker-container--color-WHITE_RED:after {\n  border-bottom-color: white;\n}\n.dyna-ui-picker-container--color-BLACK_WHITE {\n  color: white;\n  border-color: black;\n  background-color: black;\n}\n.dyna-ui-picker-container--color-BLACK_WHITE:before {\n  border-bottom-color: black;\n}\n.dyna-ui-picker-container--color-BLACK_WHITE:after {\n  border-bottom-color: black;\n}\n.dyna-ui-picker-container--color-TRANSPARENT_WHITE {\n  color: white;\n  border-color: white;\n  background-color: transparent;\n}\n.dyna-ui-picker-container--color-TRANSPARENT_WHITE:before {\n  border-bottom-color: white;\n}\n.dyna-ui-picker-container--color-TRANSPARENT_WHITE:after {\n  border-bottom-color: white;\n}\n.dyna-ui-picker-container--color-ORANGE_WHITE {\n  color: #FF6900;\n  border-color: #FF6900;\n  background-color: white;\n}\n.dyna-ui-picker-container--color-ORANGE_WHITE:before {\n  border-bottom-color: #FF6900;\n}\n.dyna-ui-picker-container--color-ORANGE_WHITE:after {\n  border-bottom-color: white;\n}\n", ""]);
+
+// exports
+
 
 /***/ })
 /******/ ]);
