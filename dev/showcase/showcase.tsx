@@ -97,6 +97,16 @@ export default {
             color: EColor.ORANGE_WHITE,
           } as IDynaPickerContainerProps
         },
+        {
+          slug: 'orange-white-hide-non-responsive',
+          title: 'orange-white-hide-responsive',
+          props: {
+            show: true,
+            style: EStyle.ROUNDED,
+            color: EColor.ORANGE_WHITE,
+            responsive: false,
+          } as IDynaPickerContainerProps
+        },
       ]
     },
     {

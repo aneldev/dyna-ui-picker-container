@@ -2,7 +2,7 @@
 
 .dyna-ui-picker-container {
 
-	&-style- {
+	&--style- {
 		&INLINE_ROUNDED {
 
 			position: absolute;
@@ -31,15 +31,17 @@
 				border-width: 14px;
 			}
 
-			@media (max-width: @media-tablet) {
-				position: fixed;
-				top: 0;
-				bottom: 0;
-				left: 0;
-				right: 0;
-				border: none;
-				margin: 0;
-				border-radius: 0;
+			&.dyna-ui-picker-container--responsive {
+				@media (max-width: @media-tablet) {
+					position: fixed;
+					top: 0;
+					bottom: 0;
+					left: 0;
+					right: 0;
+					border: none;
+					margin: 0;
+					border-radius: 0;
+				}
 			}
 		}
 	}
