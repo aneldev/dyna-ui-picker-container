@@ -17,6 +17,7 @@ export interface IDynaPickerContainerProps {
     children: any;
     style?: EStyle;
     color?: EColor;
+    responsive?: boolean;
 }
 export declare class DynaPickerContainer extends React.Component<IDynaPickerContainerProps> {
     static defaultProps: IDynaPickerContainerProps;
