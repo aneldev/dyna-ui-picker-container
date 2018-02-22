@@ -61,7 +61,7 @@ export default {
           title: 'gray-white-black',
           props: {
             style: EStyle.ROUNDED,
-            color: EColor.GRAY_WHITE_BLACK,
+            color: EColor.GREY_WHITE,
           } as IDynaPickerContainerProps
         },
         {
@@ -86,6 +86,14 @@ export default {
           props: {
             style: EStyle.ROUNDED,
             color: EColor.ORANGE_WHITE,
+          } as IDynaPickerContainerProps
+        },
+        {
+          slug: 'white-orange',
+          title: 'white-orange',
+          props: {
+            style: EStyle.ROUNDED,
+            color: EColor.WHITE_ORANGE,
           } as IDynaPickerContainerProps
         },
         {

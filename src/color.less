@@ -13,7 +13,7 @@
 				border-bottom-color: white;
 			}
 		}
-		&GRAY_WHITE_BLACK {
+		&GREY_WHITE {
 			@gray: #434343;
 			color: @gray;
 			border-color: @gray;
@@ -58,15 +58,26 @@
 				border-bottom-color: white; // !! transparent returns the white of the :before
 			}
 		}
-		&ORANGE_WHITE {
-			color: @color-ORANGE_WHITE-orange;
-			border-color: @color-ORANGE_WHITE-orange;
-			background-color: white;
+		&WHITE_ORANGE {
+			color: @color-ORANGE_WHITE-background-1;
+			border-color: @color-ORANGE_WHITE-background-1;
+			background-color: @color-ORANGE_WHITE-foreground-1;
 			&:before {
-				border-bottom-color: @color-ORANGE_WHITE-orange;
+				border-bottom-color: @color-ORANGE_WHITE-background-1;
 			}
 			&:after {
-				border-bottom-color: white;
+				border-bottom-color: @color-ORANGE_WHITE-foreground-1;
+			}
+		}
+		&ORANGE_WHITE {
+			color: @color-ORANGE_WHITE-foreground-1;
+			border-color: @color-ORANGE_WHITE-foreground-1;
+			background-color: @color-ORANGE_WHITE-background-1;
+			&:before {
+				border-bottom-color: @color-ORANGE_WHITE-foreground-1;
+			}
+			&:after {
+				border-bottom-color: @color-ORANGE_WHITE-background-1;
 			}
 		}
 	}

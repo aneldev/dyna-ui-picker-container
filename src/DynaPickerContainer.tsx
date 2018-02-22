@@ -1,4 +1,5 @@
 import * as React from "react";
+import {EColor} from "dyna-ui-styles";
 
 import "./style.less";
 import "./color.less";
@@ -7,14 +8,7 @@ export enum EStyle {
   ROUNDED = "INLINE_ROUNDED",
 }
 
-export enum EColor {
-  WHITE_BLACK = "WHITE_BLACK",
-  GRAY_WHITE_BLACK = "GRAY_WHITE_BLACK",
-  WHITE_RED = "WHITE_RED",
-  BLACK_WHITE = "BLACK_WHITE",
-  TRANSPARENT_WHITE = "TRANSPARENT_WHITE",
-  ORANGE_WHITE = "ORANGE_WHITE",
-}
+export {EColor}
 
 export interface IDynaPickerContainerProps {
   show?: boolean;
