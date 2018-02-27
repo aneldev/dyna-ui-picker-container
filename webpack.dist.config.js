@@ -2,7 +2,6 @@
 // help: https://webpack.github.io/docs/webpack-dev-server.html#webpack-dev-server-cli
 const fs = require('fs');
 const path = require('path');
-const webpack = require('webpack');
 
 const package_ = JSON.parse(fs.readFileSync('./package.json', 'utf8'));
 const loaders = require('./webpack.loaders');
@@ -13,6 +12,10 @@ const config = {
     // do not load babel-polyfill here, the application should load the polyfills!
     // the entry application code
     path.resolve(__dirname, 'src/index.tsx')
+  ],
+  externals: [
+    "react",
+    "react-dom"
   ],
   output: {
     path: path.resolve(__dirname, 'dist'),
