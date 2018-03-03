@@ -27,6 +27,50 @@ export class DynaPickerContainer extends React.Component<IDynaPickerContainerPro
     responsive: true,
   };
 
+  constructor(props: IDynaPickerContainerProps) {
+    super(props);
+    this.keepInScreen = this.keepInScreen.bind(this);
+  }
+
+  public refs: {
+    container: HTMLDivElement,
+  };
+
+  public componentDidMount(): void {
+    this.keepInScreen();
+    console.log('evenbt added');
+    window.addEventListener("resize", this.keepInScreen);
+  }
+
+  public componentWillUnmount(): void {
+    window.removeEventListener("resize", this.keepInScreen);
+  }
+
+  public componentDidUpdate(): void {
+    this.keepInScreen();
+  }
+
+  private keepInScreen(): void {
+    const {show} = this.props;
+    const {container} = this.refs;
+    if (!show) return;
+
+    // reset the position to get the actual default value
+    container.style.left = "";
+    container.style.right = "";
+
+    const getContainerLeft = (): number => container.getClientRects()[0].left; // IE11 bug fix, don't use getComputedStyle!
+
+    if (getContainerLeft() + container.offsetWidth > window.innerWidth - 10) {
+      container.style.right = "10px";
+    }
+
+    if (getContainerLeft() - 10 < 0) {
+      container.style.right = "";
+      container.style.left = "10px";
+    }
+  }
+
   public render(): JSX.Element {
     const {
       show, children, style, color, responsive,
@@ -41,7 +85,7 @@ export class DynaPickerContainer extends React.Component<IDynaPickerContainerPro
     ].join(' ').trim();
 
     return (
-      <div className={className}>{children}</div>
+      <div className={className} ref="container">{children}</div>
     );
   }
 }

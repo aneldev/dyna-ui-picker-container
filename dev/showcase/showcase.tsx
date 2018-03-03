@@ -22,9 +22,9 @@ export default {
       ),
     },
     {
-      slug: 'sizes',
+      slug: 'colours',
       faIconName: 'flask',
-      title: 'rounded - white/black - sizes',
+      title: 'rounded - colours',
       center: true,
       component: (
         <DynaPickerContainer
@@ -116,6 +116,25 @@ export default {
           } as IDynaPickerContainerProps
         },
       ]
+    },
+    {
+      slug: 'in-screen',
+      faIconName: 'flask',
+      title: 'in the screen test',
+      description:'Since is not responsive, it should stay inside the screen',
+      center: true,
+      component: (
+        <DynaPickerContainer
+          responsive={false}
+          show
+        >
+          <div style={{whiteSpace:"nowrap"}}>
+            <h1>my content</h1>
+            <h3>the content of my picker is a wide...</h3>
+            <p>awesome!</p>
+          </div>
+        </DynaPickerContainer>
+      ),
     },
     {
       slug: 'the-end',

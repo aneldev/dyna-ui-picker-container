@@ -15,5 +15,13 @@ export interface IDynaPickerContainerProps {
 }
 export declare class DynaPickerContainer extends React.Component<IDynaPickerContainerProps> {
     static defaultProps: IDynaPickerContainerProps;
+    constructor(props: IDynaPickerContainerProps);
+    refs: {
+        container: HTMLDivElement;
+    };
+    componentDidMount(): void;
+    componentWillUnmount(): void;
+    componentDidUpdate(): void;
+    private keepInScreen();
     render(): JSX.Element;
 }
