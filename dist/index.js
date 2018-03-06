@@ -569,7 +569,6 @@ var DynaPickerContainer = /** @class */ (function (_super) {
     }
     DynaPickerContainer.prototype.componentDidMount = function () {
         this.keepInScreen();
-        console.log('evenbt added');
         window.addEventListener("resize", this.keepInScreen);
     };
     DynaPickerContainer.prototype.componentWillUnmount = function () {

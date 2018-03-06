@@ -38,7 +38,6 @@ export class DynaPickerContainer extends React.Component<IDynaPickerContainerPro
 
   public componentDidMount(): void {
     this.keepInScreen();
-    console.log('evenbt added');
     window.addEventListener("resize", this.keepInScreen);
   }
 
