@@ -585,6 +585,8 @@ var DynaPickerContainer = /** @class */ (function (_super) {
         // reset the position to get the actual default value
         container.style.left = "";
         container.style.right = "";
+        if (window.innerWidth < 768)
+            return; // exit do not adjust because we are in mobile/tablet view
         var getContainerLeft = function () { return container.getClientRects()[0].left; }; // IE11 bug fix, don't use getComputedStyle!
         if (getContainerLeft() + container.offsetWidth > window.innerWidth - 10) {
             container.style.right = "10px";
