@@ -38,6 +38,7 @@ export default {
         </DynaPickerContainer>
       ),
       wrapperStyle:{
+
       },
       props: [
         {
