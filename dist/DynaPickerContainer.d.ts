@@ -3,7 +3,7 @@ import { EColor } from "dyna-ui-styles";
 import "./style.less";
 import "./color.less";
 export declare enum EStyle {
-    ROUNDED = "INLINE_ROUNDED",
+    ROUNDED = "INLINE_ROUNDED"
 }
 export { EColor };
 export interface IDynaPickerContainerProps {
@@ -22,6 +22,6 @@ export declare class DynaPickerContainer extends React.Component<IDynaPickerCont
     componentDidMount(): void;
     componentWillUnmount(): void;
     componentDidUpdate(): void;
-    private keepInScreen();
+    private keepInScreen;
     render(): JSX.Element;
 }
