@@ -15,7 +15,7 @@ export interface IDynaPickerContainerProps {
   children: any;
   style?: EStyle;
   color?: EColor;
-  responsive?: boolean;
+  responsive?: boolean;   // Set it to true and in tablet breakpoint will occupy the whole screen.
 }
 
 export class DynaPickerContainer extends React.Component<IDynaPickerContainerProps> {
@@ -83,7 +83,7 @@ export class DynaPickerContainer extends React.Component<IDynaPickerContainerPro
       `dyna-ui-picker-container--color-${color}`,
       `dyna-ui-picker-container--${show ? 'show' : 'hide'}`,
       `dyna-ui-picker-container--${responsive ? 'responsive' : ''}`,
-    ].join(' ').trim();
+    ].filter(Boolean).join(' ');
 
     return (
       <div className={className} ref="container">{children}</div>
