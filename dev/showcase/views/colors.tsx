@@ -7,11 +7,17 @@ import {
   IDynaPickerContainerProps
 } from "../../../src";
 
-export const colors: IShowcaseView =     {
+export const colors: IShowcaseView = {
   slug: 'colours',
   faIconName: 'flask',
   title: 'rounded - colours',
   center: true,
+  wrapperStyle:{
+    width: "50%",
+    height: "50px",
+    border: "1px solid darkgray",
+    backgroundColor: "gray",
+  },
   component: (
     <DynaPickerContainer
       show
@@ -23,9 +29,6 @@ export const colors: IShowcaseView =     {
       </div>
     </DynaPickerContainer>
   ),
-  wrapperStyle:{
-
-  },
   props: [
     {
       slug: 'white-black',

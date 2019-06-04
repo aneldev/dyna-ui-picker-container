@@ -58,7 +58,7 @@ export class DynaPickerContainer extends React.Component<IDynaPickerContainerPro
 
     const css = `
       .${this.id}::before{ left: ${left}px; }
-      .${this.id}::after{ left: ${left}px; }
+      .${this.id}::after{ left: ${left + 1}px; }
     `;
 
     if (this.innerStyleRef.current) this.innerStyleRef.current.innerHTML = css;
@@ -77,6 +77,8 @@ export class DynaPickerContainer extends React.Component<IDynaPickerContainerPro
     const pickerBCR = pickerContainer.getBoundingClientRect();
     const pickerX = pickerBCR.left;
 
+    if (contentWidth < 10) return 10;
+
     return contentX - pickerX + (contentWidth / 2) - 10;
   };
 
@@ -89,8 +91,6 @@ export class DynaPickerContainer extends React.Component<IDynaPickerContainerPro
     // reset the position to get the actual default value
     container.style.left = "";
     container.style.right = "";
-
-    if (window.innerWidth < 768) return; // exit do not adjust because we are in mobile/tablet view
 
     const getContainerLeft = (): number => container.getClientRects()[0].left; // IE11 bug fix, don't use getComputedStyle!
 

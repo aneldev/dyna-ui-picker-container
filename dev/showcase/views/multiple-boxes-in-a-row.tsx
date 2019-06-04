@@ -63,19 +63,6 @@ export const multipleBoxesInARow: IShowcaseView = {
 
     return <MyApp/>;
   })(),
-  props: (() => {
-    const props: IShowcaseViewProps[] = [];
-    Object.keys(EColor).forEach((color: EColor) => {
-      props.push({
-        slug: `color-${color}`,
-        title: `${color.toLocaleLowerCase()}`,
-        props: {
-          color,
-        } as IDynaPickerContainerProps,
-      } as IShowcaseViewProps);
-    });
-    return props;
-  })()
 };
 
 
