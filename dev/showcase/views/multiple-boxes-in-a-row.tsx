@@ -1,6 +1,6 @@
 import * as React from "react";
 import {IShowcaseView, IShowcaseViewProps} from "dyna-showcase";
-import {DynaPickerContainer, EColor, IDynaPickerContainerProps} from "../../../src";
+import {DynaPickerContainer, EPointerPosition, IDynaPickerContainerProps} from "../../../src";
 import {CSSProperties} from "react";
 
 export const multipleBoxesInARow: IShowcaseView = {
@@ -11,8 +11,8 @@ export const multipleBoxesInARow: IShowcaseView = {
   wrapperStyle: {
     width: "100%",
   },
-  component: (() => {
-    interface IMyAppProps {
+  component: ((props) => {
+    interface IMyAppProps extends IDynaPickerContainerProps {
     }
 
     interface IMyAppState {
@@ -21,6 +21,7 @@ export const multipleBoxesInARow: IShowcaseView = {
 
     class MyApp extends React.Component<IMyAppProps, IMyAppState> {
       constructor(props: IMyAppProps) {
+        console.debug({ props });
         super(props);
         this.state = {
           showPicker: Array(5).fill(false),
@@ -37,7 +38,6 @@ export const multipleBoxesInARow: IShowcaseView = {
       }
 
       public render(): JSX.Element {
-        const {} = this.props;
         const { showPicker } = this.state;
         return (
           <div style={containerStyle}>
@@ -50,7 +50,8 @@ export const multipleBoxesInARow: IShowcaseView = {
                 <span style={labelStyle}>[{index}] Click me</span>
                 <DynaPickerContainer
                   show={showPicker[index]}
-                  responsive={true}
+                  responsive={false}
+                  {...this.props}
                 >
                   <div style={pickerContentStyle}>Picker content {index} - Big text - Big end.</div>
                 </DynaPickerContainer>
@@ -61,7 +62,19 @@ export const multipleBoxesInARow: IShowcaseView = {
       }
     }
 
-    return <MyApp/>;
+    return <MyApp {...props as any}/>;
+  })(),
+  props: (() => {
+    return Object.keys(EPointerPosition).map((pointerPosition: EPointerPosition) => {
+      return {
+        slug: `pp-${pointerPosition}`,
+        title: pointerPosition.toLocaleLowerCase(),
+        description: 'pointer position',
+        props: {
+          pointerPosition,
+        } as IDynaPickerContainerProps,
+      } as IShowcaseViewProps;
+    })
   })(),
 };
 

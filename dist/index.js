@@ -915,12 +915,14 @@ function (_super) {
     _this.innerStyleRef = React.createRef();
 
     _this.updatePosition = function () {
-      _this.keepInScreen();
+      var pointerPosition = _this.getPointerPosition();
 
-      _this.pointLeft(_this.getPointLeft());
+      _this.locatePicker(pointerPosition);
+
+      _this.locatePointer(pointerPosition);
     };
 
-    _this.getPointLeft = function () {
+    _this.getPointerPosition = function () {
       var show = _this.props.show;
       var pickerContainer = _this.containerRef.current;
       if (!pickerContainer) return -1;
@@ -951,36 +953,26 @@ function (_super) {
     this.updatePosition();
   };
 
-  DynaPickerContainer.prototype.keepInScreen = function () {
+  DynaPickerContainer.prototype.locatePicker = function (pointerPosition) {
     var show = this.props.show;
     var container = this.containerRef.current;
     if (!show) return;
-    if (!container) return; // reset the position to get the actual default value
-
-    container.style.left = "";
-    container.style.right = "";
-
-    var getContainerLeft = function getContainerLeft() {
-      return container.getClientRects()[0].left;
-    }; // IE11 bug fix, don't use getComputedStyle!
-
-
-    if (getContainerLeft() + container.offsetWidth > window.innerWidth - 10) {
-      container.style.right = "10px";
-    }
-
-    if (getContainerLeft() - 10 < 0) {
-      container.style.right = "";
-      container.style.left = "10px";
-    }
+    if (!container) return;
+    var gapFromEdges = 8;
+    var windowWidth = window.innerWidth;
+    var pickerWidth = container.offsetWidth;
+    var pickerLeft = pointerPosition - pickerWidth / 2;
+    if (pickerLeft + pickerWidth > windowWidth) pickerLeft = windowWidth - pickerWidth - gapFromEdges;
+    if (pickerLeft < 0) pickerLeft = gapFromEdges;
+    container.style.left = pickerLeft + "px";
   };
 
-  DynaPickerContainer.prototype.pointLeft = function (left) {
+  DynaPickerContainer.prototype.locatePointer = function (pointerPosition) {
     var show = this.props.show;
     var pickerContainer = this.containerRef.current;
     if (!show) return;
     if (!pickerContainer) return;
-    var css = "\n      ." + this.id + "::before{ left: " + left + "px; }\n      ." + this.id + "::after{ left: " + (left + 1) + "px; }\n    ";
+    var css = "\n      ." + this.id + "::before{ left: " + pointerPosition + "px; }\n      ." + this.id + "::after{ left: " + (pointerPosition + 1) + "px; }\n    ";
     if (this.innerStyleRef.current) this.innerStyleRef.current.innerHTML = css;
   };
 

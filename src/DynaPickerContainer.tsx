@@ -5,35 +5,43 @@ import {EColor} from "dyna-ui-styles";
 import "./style.less";
 import "./color.less";
 
+export interface IDynaPickerContainerProps {
+  show?: boolean;
+  style?: EStyle;
+  color?: EColor;
+  pointerPosition?: EPointerPosition;
+  responsive?: boolean;   // Set it to true and in tablet breakpoint will occupy the whole screen.
+  children: JSX.Element;
+}
+
 export enum EStyle {
   ROUNDED = "INLINE_ROUNDED",
 }
 
+export enum EPointerPosition {
+  LEFT = "LEFT",
+  MIDDLE = "MIDDLE",
+  RIGHT = "RIGHT",
+}
+
 export {EColor}
 
-export interface IDynaPickerContainerProps {
-  show?: boolean;
-  children: JSX.Element;
-  style?: EStyle;
-  color?: EColor;
-  responsive?: boolean;   // Set it to true and in tablet breakpoint will occupy the whole screen.
-}
+const SIZE_OF_POINTER = 16;
+const EDGE_GAP = 8;
+const MIN_POINTER_GAP = 32; // from the picker
 
 export class DynaPickerContainer extends React.Component<IDynaPickerContainerProps> {
   static defaultProps: Partial<IDynaPickerContainerProps> = {
     show: true,
     style: EStyle.ROUNDED,
     color: EColor.WHITE_BLACK,
+    pointerPosition: EPointerPosition.MIDDLE,
     responsive: true,
   };
 
   private readonly id = `id--${guid()}`;
   private readonly containerRef = React.createRef<HTMLDivElement>();
   private readonly innerStyleRef = React.createRef<HTMLStyleElement>();
-
-  constructor(props: IDynaPickerContainerProps) {
-    super(props);
-  }
 
   public componentDidMount(): void {
     this.updatePosition();
@@ -49,63 +57,71 @@ export class DynaPickerContainer extends React.Component<IDynaPickerContainerPro
   }
 
   public updatePosition=(): void =>{
-    this.keepInScreen();
-    this.pointLeft(this.getPointLeft());
+    const pointerPosition = this.getPointerPosition();
+    if (pointerPosition === -1) return; // Exit. The ui is not ready or there is no need to locate..
+    this.locatePicker(pointerPosition);
+    this.locatePointer(pointerPosition);
   };
 
-  private keepInScreen (): void {
-    const {show} = this.props;
-    const container = this.containerRef.current;
-    if (!show) return;
-    if (!container) return;
+  private getPointerPosition = (): number => { // Get position of the pointer on the screen
+    const { show, pointerPosition } = this.props;
+    if (!show) return -1;
 
-    // reset the position to get the actual default value
-    container.style.left = "";
-    container.style.right = "";
-
-    const getContainerLeft = (): number => container.getClientRects()[0].left; // IE11 bug fix, don't use getComputedStyle!
-
-    if (getContainerLeft() + container.offsetWidth > window.innerWidth - 10) {
-      container.style.right = "10px";
-    }
-
-    if (getContainerLeft() - 10 < 0) {
-      container.style.right = "";
-      container.style.left = "10px";
-    }
-  }
-
-  private pointLeft(left: number): void {
-    const { show } = this.props;
     const pickerContainer = this.containerRef.current;
+    if (!pickerContainer) return -1;
+
+    const content: HTMLElement = pickerContainer.parentElement as HTMLElement;
+    const contentBCR = content.getBoundingClientRect();
+    const contentLeft = contentBCR.left;
+    const contentWidth = contentBCR.width;
+
+    switch (pointerPosition) {
+      case EPointerPosition.LEFT:
+        return contentLeft + MIN_POINTER_GAP + EDGE_GAP;
+      case EPointerPosition.RIGHT:
+        return contentLeft + (contentWidth - MIN_POINTER_GAP - EDGE_GAP - EDGE_GAP);
+      case EPointerPosition.MIDDLE:
+      default:
+        return contentLeft + (contentWidth / 2);
+    }
+  };
+
+  private locatePointer(pointerPosition: number): void {
+    const { show } = this.props;
     if (!show) return;
+
+    const pickerContainer = this.containerRef.current;
     if (!pickerContainer) return;
 
+    const pickerBCR = pickerContainer.getBoundingClientRect();
+    const pickerLeft = pickerBCR.left;
+
+    const localLeft = pointerPosition - pickerLeft - (SIZE_OF_POINTER / 2);
+
     const css = `
-      .${this.id}::before{ left: ${left}px; }
-      .${this.id}::after{ left: ${left + 1}px; }
+      .${this.id}::before{ left: ${localLeft}px; }
+      .${this.id}::after{ left: ${localLeft + 1}px; }
     `;
 
     if (this.innerStyleRef.current) this.innerStyleRef.current.innerHTML = css;
   }
 
-  private getPointLeft = (): number => {
+  private locatePicker(pointerPosition: number): void {
     const { show } = this.props;
-    const pickerContainer = this.containerRef.current;
-    if (!pickerContainer) return -1;
-    const content: HTMLElement = pickerContainer.parentElement as HTMLElement;
-    if (!show) return -1;
+    const container = this.containerRef.current;
+    if (!show) return;
+    if (!container) return;
 
-    const contentBCR = content.getBoundingClientRect();
-    const contentX = contentBCR.left;
-    const contentWidth = contentBCR.width;
-    const pickerBCR = pickerContainer.getBoundingClientRect();
-    const pickerX = pickerBCR.left;
+    const windowWidth = window.innerWidth;
+    const pickerWidth = container.offsetWidth;
+    let pickerLeft: number = pointerPosition - (pickerWidth / 2);
 
-    if (contentWidth < 10) return 10;
+    if (pickerLeft + pickerWidth > windowWidth - EDGE_GAP) pickerLeft = windowWidth - pickerWidth - EDGE_GAP;
+    if (pointerPosition - pickerLeft < MIN_POINTER_GAP) pickerLeft = pointerPosition - MIN_POINTER_GAP;
+    if (pickerLeft < EDGE_GAP) pickerLeft = EDGE_GAP;
 
-    return contentX - pickerX + (contentWidth / 2) - 10;
-  };
+    container.style.left = `${pickerLeft}px`;
+  }
 
   public render(): JSX.Element {
     const {

@@ -23,8 +23,8 @@ export declare class DynaPickerContainer extends React.Component<IDynaPickerCont
     componentWillUnmount(): void;
     componentDidUpdate(): void;
     updatePosition: () => void;
-    private keepInScreen;
-    private pointLeft;
-    private getPointLeft;
+    private getPointerPosition;
+    private locatePicker;
+    private locatePointer;
     render(): JSX.Element;
 }
