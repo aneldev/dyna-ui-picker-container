@@ -8,20 +8,23 @@ export declare enum EStyle {
 export { EColor };
 export interface IDynaPickerContainerProps {
     show?: boolean;
-    children: any;
+    children: JSX.Element;
     style?: EStyle;
     color?: EColor;
     responsive?: boolean;
 }
 export declare class DynaPickerContainer extends React.Component<IDynaPickerContainerProps> {
-    static defaultProps: IDynaPickerContainerProps;
+    static defaultProps: Partial<IDynaPickerContainerProps>;
+    private readonly id;
+    private readonly containerRef;
+    private readonly innerStyleRef;
     constructor(props: IDynaPickerContainerProps);
-    refs: {
-        container: HTMLDivElement;
-    };
     componentDidMount(): void;
     componentWillUnmount(): void;
     componentDidUpdate(): void;
+    updatePosition: () => void;
     private keepInScreen;
+    private pointLeft;
+    private getPointLeft;
     render(): JSX.Element;
 }

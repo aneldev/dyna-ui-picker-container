@@ -33,21 +33,46 @@ export class DynaPickerContainer extends React.Component<IDynaPickerContainerPro
 
   constructor(props: IDynaPickerContainerProps) {
     super(props);
-    (window as any).point = this.pointLeft.bind(this)
   }
 
   public componentDidMount(): void {
-    this.keepInScreen();
-    window.addEventListener("resize", this.keepInScreen);
+    this.updatePosition();
+    window.addEventListener("resize", this.updatePosition);
   }
 
   public componentWillUnmount(): void {
-    window.removeEventListener("resize", this.keepInScreen);
+    window.removeEventListener("resize", this.updatePosition);
   }
 
   public componentDidUpdate(): void {
+    this.updatePosition();
+  }
+
+  public updatePosition=(): void =>{
     this.keepInScreen();
     this.pointLeft(this.getPointLeft());
+  };
+
+  private keepInScreen (): void {
+    const {show} = this.props;
+    const container = this.containerRef.current;
+    if (!show) return;
+    if (!container) return;
+
+    // reset the position to get the actual default value
+    container.style.left = "";
+    container.style.right = "";
+
+    const getContainerLeft = (): number => container.getClientRects()[0].left; // IE11 bug fix, don't use getComputedStyle!
+
+    if (getContainerLeft() + container.offsetWidth > window.innerWidth - 10) {
+      container.style.right = "10px";
+    }
+
+    if (getContainerLeft() - 10 < 0) {
+      container.style.right = "";
+      container.style.left = "10px";
+    }
   }
 
   private pointLeft(left: number): void {
@@ -81,28 +106,6 @@ export class DynaPickerContainer extends React.Component<IDynaPickerContainerPro
 
     return contentX - pickerX + (contentWidth / 2) - 10;
   };
-
-  private keepInScreen = (): void => {
-    const {show} = this.props;
-    const container = this.containerRef.current;
-    if (!show) return;
-    if (!container) return;
-
-    // reset the position to get the actual default value
-    container.style.left = "";
-    container.style.right = "";
-
-    const getContainerLeft = (): number => container.getClientRects()[0].left; // IE11 bug fix, don't use getComputedStyle!
-
-    if (getContainerLeft() + container.offsetWidth > window.innerWidth - 10) {
-      container.style.right = "10px";
-    }
-
-    if (getContainerLeft() - 10 < 0) {
-      container.style.right = "";
-      container.style.left = "10px";
-    }
-  }
 
   public render(): JSX.Element {
     const {
