@@ -45,14 +45,14 @@ Under the `dev/app/` folder there is a small web application that uses this comp
 
 Under the `dev/public/` folder is the http folder of the application, you should not do anything there because this is not distributed.
 
-Create your showcase updating the file `dev/showcase/showcase.tsx`. The [https://github.com/aneldev/dyna-showcase](documentation) to create your showcase in easy enough.
+Create your showcase updating the file `dev/showcase/index.tsx`. The [https://github.com/aneldev/dyna-showcase](documentation) to create your showcase in easy enough.
 
 ## Develop / Debug / Preview
 
 This boilerplate uses the [dyna-showcase](https://github.com/aneldev/dyna-showcase) to show how your module is rendered under different props. The concept is the same as the StoryBook but it is much lighter and without styles and some tools that helps the debugging and development. 
 
 - Implement your component(s) under `src/`
-- Implement the usage of your components(s) in `dev/showcase/showcase.tsx`
+- Implement the usage of your components(s) in `dev/showcase/index.tsx`
 - Call `npm start`
 - Open in any browser [http://localhost:3200](http://localhost:3200) to **develop**, **debug** or **preview**.
 

@@ -1,13 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Home has expected content with deep render 1`] = `
-<a
-  className="dyna-button dnbtn-style-ROUNDED dnbtn-color-WHITE_BLACK dnbtn-size-MEDIUM"
-  href={null}
-  onClick={[Function]}
->
-  <button>
+<Fragment>
+  <style />
+  <div
+    className="dyna-ui-picker-container dyna-ui-picker-container--style-INLINE_ROUNDED dyna-ui-picker-container--color-WHITE_BLACK dyna-ui-picker-container--show dyna-ui-picker-container--responsive id--1h00befc-1ee71dda-18791952197647120"
+  >
     My button
-  </button>
-</a>
+  </div>
+</Fragment>
 `;
