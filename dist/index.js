@@ -929,9 +929,7 @@ function (_super) {
     _this.updatePosition = function () {
       var pointerPosition = _this.getPointerPosition();
 
-      if (pointerPosition === -1) return; // Exit. The ui is not ready or there is no need to locate.
-
-      console.debug('pointer position', pointerPosition);
+      if (pointerPosition === -1) return; // Exit. The ui is not ready or there is no need to locate..
 
       _this.locatePicker(pointerPosition);
 
