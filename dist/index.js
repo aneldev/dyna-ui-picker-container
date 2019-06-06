@@ -129,7 +129,7 @@ exports = module.exports = __webpack_require__(/*! ../node_modules/css-loader/li
 
 
 // module
-exports.push([module.i, ".dyna-ui-picker-container {\n  cursor: default;\n}\n.dyna-ui-picker-container--style-INLINE_ROUNDED {\n  position: absolute;\n  border-style: solid;\n  border-width: 1px;\n  border-radius: 10px;\n  margin-top: 12px;\n}\n.dyna-ui-picker-container--style-INLINE_ROUNDED:before,\n.dyna-ui-picker-container--style-INLINE_ROUNDED:after {\n  content: '';\n  display: block;\n  position: absolute;\n  width: 0;\n  height: 0;\n  border-style: solid;\n  top: -30px;\n  border-color: transparent transparent deeppink transparent;\n  border-width: 15px;\n}\n.dyna-ui-picker-container--style-INLINE_ROUNDED:after {\n  top: -28px;\n  border-width: 14px;\n}\n@media (max-width: 768px) {\n  .dyna-ui-picker-container--style-INLINE_ROUNDED.dyna-ui-picker-container--responsive {\n    position: fixed;\n    top: 0;\n    bottom: 0;\n    left: 0;\n    right: 0;\n    border: none;\n    margin: 0;\n    border-radius: 0;\n  }\n}\n.dyna-ui-picker-container--show {\n  display: block;\n}\n.dyna-ui-picker-container--hide {\n  display: none;\n}\n", ""]);
+exports.push([module.i, ".dyna-ui-picker-container {\n  cursor: default;\n}\n.dyna-ui-picker-container__wrapper {\n  position: relative;\n}\n.dyna-ui-picker-container--style-INLINE_ROUNDED {\n  position: absolute;\n  border-style: solid;\n  border-width: 1px;\n  border-radius: 10px;\n  margin-top: 12px;\n}\n.dyna-ui-picker-container--style-INLINE_ROUNDED:before,\n.dyna-ui-picker-container--style-INLINE_ROUNDED:after {\n  content: '';\n  display: block;\n  position: absolute;\n  width: 0;\n  height: 0;\n  border-style: solid;\n  top: -30px;\n  border-color: transparent transparent deeppink transparent;\n  border-width: 15px;\n}\n.dyna-ui-picker-container--style-INLINE_ROUNDED:after {\n  top: -28px;\n  border-width: 14px;\n}\n@media (max-width: 768px) {\n  .dyna-ui-picker-container--style-INLINE_ROUNDED.dyna-ui-picker-container--responsive {\n    position: fixed;\n    top: 0;\n    bottom: 0;\n    left: 0;\n    right: 0;\n    border: none;\n    margin: 0;\n    border-radius: 0;\n  }\n}\n.dyna-ui-picker-container--show {\n  display: block;\n}\n.dyna-ui-picker-container--hide {\n  display: none;\n}\n", ""]);
 
 // exports
 
@@ -994,20 +994,19 @@ function (_super) {
   DynaPickerContainer.prototype.locatePicker = function (pointerPosition) {
     var show = this.props.show;
     if (!show) return;
-    var container = this.containerRef.current;
-    if (!container) return;
+    var pickerContainer = this.containerRef.current;
+    if (!pickerContainer) return;
     var windowWidth = window.innerWidth;
-    var pickerWidth = container.offsetWidth;
+    var pickerWidth = pickerContainer.offsetWidth;
+    var content = pickerContainer.parentElement;
+    var contentBCR = content.getBoundingClientRect();
+    var contentLeft = contentBCR.left;
     var pickerLeft = pointerPosition - pickerWidth / 2;
     if (pickerLeft + pickerWidth > windowWidth - EDGE_GAP) pickerLeft = windowWidth - pickerWidth - EDGE_GAP;
     if (pointerPosition - pickerLeft < MIN_POINTER_GAP) pickerLeft = pointerPosition - MIN_POINTER_GAP;
     if (pickerLeft < EDGE_GAP) pickerLeft = EDGE_GAP;
-    console.debug({
-      windowWidth: windowWidth,
-      pickerWidth: pickerWidth,
-      pickerLeft: pickerLeft
-    });
-    container.style.left = pickerLeft + "px";
+    pickerLeft -= contentLeft;
+    pickerContainer.style.left = pickerLeft + "px";
   };
 
   DynaPickerContainer.prototype.render = function () {
@@ -1017,11 +1016,14 @@ function (_super) {
         style = _a.style,
         color = _a.color,
         responsive = _a.responsive;
-    var className = ['dyna-ui-picker-container', "dyna-ui-picker-container--style-" + style, "dyna-ui-picker-container--color-" + color, "dyna-ui-picker-container--" + (show ? 'show' : 'hide'), "dyna-ui-picker-container--" + (responsive ? 'responsive' : ''), this.id].filter(Boolean).join(' ');
-    return React.createElement(React.Fragment, null, React.createElement("style", {
+    var classNameWrapper = ['dyna-ui-picker-container__wrapper', this.id].filter(Boolean).join(' ');
+    var classNameContainer = ['dyna-ui-picker-container', "dyna-ui-picker-container--style-" + style, "dyna-ui-picker-container--color-" + color, "dyna-ui-picker-container--" + (show ? 'show' : 'hide'), "dyna-ui-picker-container--" + (responsive ? 'responsive' : ''), this.id].filter(Boolean).join(' ');
+    return React.createElement("div", {
+      className: classNameWrapper
+    }, React.createElement("style", {
       ref: this.innerStyleRef
     }), React.createElement("div", {
-      className: className,
+      className: classNameContainer,
       ref: this.containerRef
     }, children));
   };

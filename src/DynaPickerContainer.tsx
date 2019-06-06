@@ -110,18 +110,25 @@ export class DynaPickerContainer extends React.Component<IDynaPickerContainerPro
     const { show } = this.props;
     if (!show) return;
 
-    const container = this.containerRef.current;
-    if (!container) return;
+    const pickerContainer = this.containerRef.current;
+    if (!pickerContainer) return;
 
     const windowWidth = window.innerWidth;
-    const pickerWidth = container.offsetWidth;
+    const pickerWidth = pickerContainer.offsetWidth;
+
+    const content: HTMLElement = pickerContainer.parentElement as HTMLElement;
+    const contentBCR = content.getBoundingClientRect();
+    const contentLeft = contentBCR.left;
+
     let pickerLeft: number = pointerPosition - (pickerWidth / 2);
 
     if (pickerLeft + pickerWidth > windowWidth - EDGE_GAP) pickerLeft = windowWidth - pickerWidth - EDGE_GAP;
     if (pointerPosition - pickerLeft < MIN_POINTER_GAP) pickerLeft = pointerPosition - MIN_POINTER_GAP;
     if (pickerLeft < EDGE_GAP) pickerLeft = EDGE_GAP;
 
-    container.style.left = `${pickerLeft}px`;
+    pickerLeft -= contentLeft;
+
+    pickerContainer.style.left = `${pickerLeft}px`;
   }
 
   public render(): JSX.Element {
@@ -129,7 +136,12 @@ export class DynaPickerContainer extends React.Component<IDynaPickerContainerPro
       show, children, style, color, responsive,
     } = this.props;
 
-    const className: string = [
+    const classNameWrapper: string = [
+      'dyna-ui-picker-container__wrapper',
+      this.id,
+    ].filter(Boolean).join(' ');
+
+    const classNameContainer: string = [
       'dyna-ui-picker-container',
       `dyna-ui-picker-container--style-${style}`,
       `dyna-ui-picker-container--color-${color}`,
@@ -139,12 +151,12 @@ export class DynaPickerContainer extends React.Component<IDynaPickerContainerPro
     ].filter(Boolean).join(' ');
 
     return (
-      <>
+      <div className={classNameWrapper}>
         <style ref={this.innerStyleRef}/>
-        <div className={className} ref={this.containerRef}>
+        <div className={classNameContainer} ref={this.containerRef}>
           {children}
         </div>
-      </>
+      </div>
     );
   }
 }
