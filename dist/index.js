@@ -902,13 +902,25 @@ var EStyle;
   EStyle["ROUNDED"] = "INLINE_ROUNDED";
 })(EStyle = exports.EStyle || (exports.EStyle = {}));
 
+var EPointerPosition;
+
+(function (EPointerPosition) {
+  EPointerPosition["LEFT"] = "LEFT";
+  EPointerPosition["MIDDLE"] = "MIDDLE";
+  EPointerPosition["RIGHT"] = "RIGHT";
+})(EPointerPosition = exports.EPointerPosition || (exports.EPointerPosition = {}));
+
+var SIZE_OF_POINTER = 16;
+var EDGE_GAP = 8;
+var MIN_POINTER_GAP = 32; // from the picker
+
 var DynaPickerContainer =
 /** @class */
 function (_super) {
   __extends(DynaPickerContainer, _super);
 
-  function DynaPickerContainer(props) {
-    var _this = _super.call(this, props) || this;
+  function DynaPickerContainer() {
+    var _this = _super !== null && _super.apply(this, arguments) || this;
 
     _this.id = "id--" + dyna_guid_1.guid();
     _this.containerRef = React.createRef();
@@ -917,24 +929,38 @@ function (_super) {
     _this.updatePosition = function () {
       var pointerPosition = _this.getPointerPosition();
 
+      if (pointerPosition === -1) return; // Exit. The ui is not ready or there is no need to locate.
+
+      console.debug('pointer position', pointerPosition);
+
       _this.locatePicker(pointerPosition);
 
       _this.locatePointer(pointerPosition);
     };
 
     _this.getPointerPosition = function () {
-      var show = _this.props.show;
+      var _a = _this.props,
+          show = _a.show,
+          pointerPosition = _a.pointerPosition;
+      if (!show) return -1;
       var pickerContainer = _this.containerRef.current;
       if (!pickerContainer) return -1;
       var content = pickerContainer.parentElement;
-      if (!show) return -1;
       var contentBCR = content.getBoundingClientRect();
-      var contentX = contentBCR.left;
+      var contentLeft = contentBCR.left;
       var contentWidth = contentBCR.width;
-      var pickerBCR = pickerContainer.getBoundingClientRect();
-      var pickerX = pickerBCR.left;
-      if (contentWidth < 10) return 10;
-      return contentX - pickerX + contentWidth / 2 - 10;
+
+      switch (pointerPosition) {
+        case EPointerPosition.LEFT:
+          return contentLeft + MIN_POINTER_GAP + EDGE_GAP;
+
+        case EPointerPosition.RIGHT:
+          return contentLeft + (contentWidth - MIN_POINTER_GAP - EDGE_GAP - EDGE_GAP);
+
+        case EPointerPosition.MIDDLE:
+        default:
+          return contentLeft + contentWidth / 2;
+      }
     };
 
     return _this;
@@ -953,27 +979,35 @@ function (_super) {
     this.updatePosition();
   };
 
+  DynaPickerContainer.prototype.locatePointer = function (pointerPosition) {
+    var show = this.props.show;
+    if (!show) return;
+    var pickerContainer = this.containerRef.current;
+    if (!pickerContainer) return;
+    var pickerBCR = pickerContainer.getBoundingClientRect();
+    var pickerLeft = pickerBCR.left;
+    var localLeft = pointerPosition - pickerLeft - SIZE_OF_POINTER / 2;
+    var css = "\n      ." + this.id + "::before{ left: " + localLeft + "px; }\n      ." + this.id + "::after{ left: " + (localLeft + 1) + "px; }\n    ";
+    if (this.innerStyleRef.current) this.innerStyleRef.current.innerHTML = css;
+  };
+
   DynaPickerContainer.prototype.locatePicker = function (pointerPosition) {
     var show = this.props.show;
-    var container = this.containerRef.current;
     if (!show) return;
+    var container = this.containerRef.current;
     if (!container) return;
-    var gapFromEdges = 8;
     var windowWidth = window.innerWidth;
     var pickerWidth = container.offsetWidth;
     var pickerLeft = pointerPosition - pickerWidth / 2;
-    if (pickerLeft + pickerWidth > windowWidth) pickerLeft = windowWidth - pickerWidth - gapFromEdges;
-    if (pickerLeft < 0) pickerLeft = gapFromEdges;
+    if (pickerLeft + pickerWidth > windowWidth - EDGE_GAP) pickerLeft = windowWidth - pickerWidth - EDGE_GAP;
+    if (pointerPosition - pickerLeft < MIN_POINTER_GAP) pickerLeft = pointerPosition - MIN_POINTER_GAP;
+    if (pickerLeft < EDGE_GAP) pickerLeft = EDGE_GAP;
+    console.debug({
+      windowWidth: windowWidth,
+      pickerWidth: pickerWidth,
+      pickerLeft: pickerLeft
+    });
     container.style.left = pickerLeft + "px";
-  };
-
-  DynaPickerContainer.prototype.locatePointer = function (pointerPosition) {
-    var show = this.props.show;
-    var pickerContainer = this.containerRef.current;
-    if (!show) return;
-    if (!pickerContainer) return;
-    var css = "\n      ." + this.id + "::before{ left: " + pointerPosition + "px; }\n      ." + this.id + "::after{ left: " + (pointerPosition + 1) + "px; }\n    ";
-    if (this.innerStyleRef.current) this.innerStyleRef.current.innerHTML = css;
   };
 
   DynaPickerContainer.prototype.render = function () {
@@ -996,6 +1030,7 @@ function (_super) {
     show: true,
     style: EStyle.ROUNDED,
     color: dyna_ui_styles_1.EColor.WHITE_BLACK,
+    pointerPosition: EPointerPosition.MIDDLE,
     responsive: true
   };
   return DynaPickerContainer;
@@ -1013,6 +1048,10 @@ exports.DynaPickerContainer = DynaPickerContainer;
 
   reactHotLoader.register(__extends, "__extends", "/Users/dennis/dev/dyna/dyna-ui-picker-container/src/DynaPickerContainer.tsx");
   reactHotLoader.register(EStyle, "EStyle", "/Users/dennis/dev/dyna/dyna-ui-picker-container/src/DynaPickerContainer.tsx");
+  reactHotLoader.register(EPointerPosition, "EPointerPosition", "/Users/dennis/dev/dyna/dyna-ui-picker-container/src/DynaPickerContainer.tsx");
+  reactHotLoader.register(SIZE_OF_POINTER, "SIZE_OF_POINTER", "/Users/dennis/dev/dyna/dyna-ui-picker-container/src/DynaPickerContainer.tsx");
+  reactHotLoader.register(EDGE_GAP, "EDGE_GAP", "/Users/dennis/dev/dyna/dyna-ui-picker-container/src/DynaPickerContainer.tsx");
+  reactHotLoader.register(MIN_POINTER_GAP, "MIN_POINTER_GAP", "/Users/dennis/dev/dyna/dyna-ui-picker-container/src/DynaPickerContainer.tsx");
   reactHotLoader.register(DynaPickerContainer, "DynaPickerContainer", "/Users/dennis/dev/dyna/dyna-ui-picker-container/src/DynaPickerContainer.tsx");
 })();
 
@@ -1077,6 +1116,7 @@ var DynaPickerContainer_1 = __webpack_require__(/*! ./DynaPickerContainer */ "./
 exports.DynaPickerContainer = DynaPickerContainer_1.DynaPickerContainer;
 exports.EStyle = DynaPickerContainer_1.EStyle;
 exports.EColor = DynaPickerContainer_1.EColor;
+exports.EPointerPosition = DynaPickerContainer_1.EPointerPosition;
 
 /***/ }),
 

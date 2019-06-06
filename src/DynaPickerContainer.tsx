@@ -108,8 +108,9 @@ export class DynaPickerContainer extends React.Component<IDynaPickerContainerPro
 
   private locatePicker(pointerPosition: number): void {
     const { show } = this.props;
-    const container = this.containerRef.current;
     if (!show) return;
+
+    const container = this.containerRef.current;
     if (!container) return;
 
     const windowWidth = window.innerWidth;

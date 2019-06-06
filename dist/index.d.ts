@@ -1,2 +1,1 @@
-import { DynaPickerContainer, IDynaPickerContainerProps, EStyle, EColor } from "./DynaPickerContainer";
-export { DynaPickerContainer, IDynaPickerContainerProps, EStyle, EColor, };
+export { DynaPickerContainer, IDynaPickerContainerProps, EStyle, EColor, EPointerPosition, } from "./DynaPickerContainer";
