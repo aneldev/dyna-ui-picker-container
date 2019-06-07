@@ -21,7 +21,6 @@ export const multipleBoxesInARow: IShowcaseView = {
 
     class MyApp extends React.Component<IMyAppProps, IMyAppState> {
       constructor(props: IMyAppProps) {
-        console.debug({ props });
         super(props);
         this.state = {
           showPicker: Array(5).fill(false),
